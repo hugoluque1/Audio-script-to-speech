@@ -11,6 +11,11 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* --- Inicio: Fondo Animado --- */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            /* --- Fin: Fondo Animado --- */
         }
         .loader {
             border: 4px solid #f3f3f3;
@@ -24,78 +29,173 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* --- Inicio: Keyframes para Fondo Animado --- */
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* --- Fin: Keyframes para Fondo Animado --- */
+
+        /* Estilo para el enlace 'Main Page' como botón */
+        .main-page-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .main-page-button:hover {
+            background-color: #4338ca; /* indigo-700 */
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para efectos de sombra y contorno elegante en inputs/selects */
+        .form-control-elegant {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-control-elegant:focus {
+            outline: none;
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Estilo elegante para etiquetas */
+        .label-elegant {
+            text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+<!-- Se eliminó 'bg-gray-100' para permitir que el fondo animado se muestre -->
+<body class="flex items-center justify-center min-h-screen p-4">
 
     <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 w-full max-w-2xl transform transition-all duration-500">
         <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800">Audio Script to Speech</h1>
-            <!-- Texto actualizado a Inglés como solicitaste -->
-            <p class="text-gray-500 mt-2">Developed by Hugo Luque & Powered by AI.</p>
+            <!-- Título actualizado -->
+            <h1 class="text-4xl font-bold text-gray-800 tracking-tight label-elegant">Speakable</h1>
+            <!-- Enlace "Main page" con estilo de botón -->
+            <a href="https://skillswise.netlify.app/" target="_blank" rel="noopener noreferrer" class="main-page-button">
+                Main page
+            </a>
         </header>
 
         <main>
-            <!-- Formulario traducido a Inglés -->
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-2 label-elegant">AI Text-to-Speech</h2>
+
+            <!-- API Key Input -->
             <div class="mb-6">
-                <label for="api-key" class="block text-lg font-medium text-gray-700 mb-2">Your Google AI API Key</label>
-                <input type="password" id="api-key" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-300" placeholder="Paste your API Key here">
+                <label for="api-key" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Your Google AI API Key</label>
+                <input type="password" id="api-key" class="w-full p-4 border border-gray-300 rounded-lg form-control-elegant" placeholder="Paste your API Key here">
                 <p class="text-xs text-gray-500 mt-1">Get your free key from Google AI Studio.</p>
             </div>
 
-            <!-- Selección de Modo -->
+            <!-- New Select Boxes (Metadata) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                    <label for="english-level" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">English Level MCER</label>
+                    <select id="english-level" class="w-full p-4 bg-white border border-gray-300 rounded-lg form-control-elegant">
+                        <option value="S">Started</option>
+                        <option value="A1">A1 Beginner</option>
+                        <option value="A2">A2 Elementary</option>
+                        <option value="B1">B1 intermediate</option>
+                        <option value="B2">B2 Upper Intermediate</option>
+                        <option value="C1">C1 Advanced</option>
+                        <option value="C2">C2 Proficiency (Mastery)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="audio-type" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Audio Type</label>
+                    <select id="audio-type" class="w-full p-4 bg-white border border-gray-300 rounded-lg form-control-elegant">
+                        <option value="Reading">Reading</option>
+                        <option value="Listening">Listening</option>
+                        <option value="Phonetic">Phonetic</option>
+                        <option value="Podcast">Podcast</option>
+                        <option value="AudioScript">Audio Script</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="audio-track" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Audio Track</label>
+                    <select id="audio-track" class="w-full p-4 bg-white border border-gray-300 rounded-lg form-control-elegant">
+                        <!-- Tracks populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Mode Selection -->
             <div class="mb-6">
-                <label class="block text-lg font-medium text-gray-700 mb-2">Audio Mode</label>
+                <label class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Audio Mode</label>
                 <div class="flex items-center space-x-4">
                     <label class="flex items-center">
-                        <input type="radio" name="audio-mode" value="single" class="form-radio h-5 w-5 text-blue-600" checked>
+                        <input type="radio" name="audio-mode" value="single" class="form-radio h-5 w-5 text-blue-600 form-control-elegant" checked>
                         <span class="ml-2 text-gray-700">Single Voice</span>
                     </label>
                     <label class="flex items-center">
-                        <input type="radio" name="audio-mode" value="conversation" class="form-radio h-5 w-5 text-blue-600">
+                        <input type="radio" name="audio-mode" value="conversation" class="form-radio h-5 w-5 text-blue-600 form-control-elegant">
                         <span class="ml-2 text-gray-700">Conversation</span>
                     </label>
                 </div>
             </div>
             
-            <!-- Sección de Script de Entrada -->
+            <!-- Input Script Section -->
             <div class="mb-6">
-                <label for="script-text" class="block text-lg font-medium text-gray-700 mb-2">Your Script</label>
-                <textarea id="script-text" rows="8" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-300" placeholder="Enter your text here... For example: 'Hello, world! I am a natural language model.'"></textarea>
+                <label for="script-text" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Your Script</label>
+                <textarea id="script-text" rows="8" class="w-full p-4 border border-gray-300 rounded-lg form-control-elegant" placeholder="Enter your text here.."></textarea>
             </div>
 
-            <!-- Ajustes de Voz -->
+            <!-- Voice Settings -->
             <div id="single-voice-settings" class="mb-8">
-                <label for="voice-select" class="block text-lg font-medium text-gray-700 mb-2">Choose a Voice</label>
-                <select id="voice-select" class="w-full p-4 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-300"></select>
+                <label for="voice-select" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Choose a Voice</label>
+                <select id="voice-select" class="w-full p-4 bg-white border border-gray-300 rounded-lg form-control-elegant"></select>
             </div>
 
             <div id="conversation-settings" class="mb-8 hidden space-y-4">
                 <div>
-                    <label for="speaker-count" class="block text-lg font-medium text-gray-700 mb-2">Number of Speakers</label>
-                    <input type="number" id="speaker-count" value="2" min="2" max="10" class="w-full p-4 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-300">
+                    <label for="speaker-count" class="block text-lg font-medium text-gray-700 mb-2 label-elegant">Number of Speakers</label>
+                    <input type="number" id="speaker-count" value="2" min="2" max="10" class="w-full p-4 bg-white border border-gray-300 rounded-lg form-control-elegant">
                 </div>
                 <div id="speaker-voices-container" class="space-y-3"></div>
             </div>
 
-            <!-- Botón de Acción -->
-            <button id="generate-btn" class="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:scale-100">
+            <!-- Action Button -->
+            <button id="generate-btn" class="w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:scale-100 shadow-md">
                 Generate Speech
             </button>
 
-            <!-- Sección de Carga, Reproductor de Audio y Descarga -->
+            <!-- Loading, Audio Player, and Download Section -->
             <div id="output-section" class="mt-8 text-center hidden">
                 <div id="loader" class="loader mx-auto my-4 hidden"></div>
                 <div id="error-message" class="text-red-500 my-4 font-medium"></div>
                 <audio id="audio-player" controls class="w-full mt-4 hidden"></audio>
-                <button id="download-btn" class="mt-6 w-full bg-green-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300 transform hover:scale-105 hidden">
+                <button id="download-btn" class="mt-6 w-full bg-green-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300 transform hover:scale-105 hidden shadow-md">
                     Download MP3
                 </button>
             </div>
+
         </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 border-t border-gray-200 pt-6">
+            <p class="text-gray-500 text-sm">Developed by Hugo Luque</p>
+        </footer>
     </div>
 
-    <script type="module">
+    <script>
         // --- DOM Element References ---
         const apiKeyInput = document.getElementById('api-key');
         const scriptText = document.getElementById('script-text');
@@ -112,10 +212,15 @@
         const speakerCountInput = document.getElementById('speaker-count');
         const speakerVoicesContainer = document.getElementById('speaker-voices-container');
 
+        // --- New DOM References (Audio Metadata) ---
+        const englishLevelSelect = document.getElementById('english-level');
+        const audioTypeSelect = document.getElementById('audio-type');
+        const audioTrackSelect = document.getElementById('audio-track');
+
         // --- State ---
         let mp3Blob = null;
 
-        // --- Pre-built Voices from Gemini API (Translated to English) ---
+        // --- Pre-built Voices from Gemini API ---
         const voices = [
             { name: "Zephyr (Bright)", value: "Zephyr" },
             { name: "Puck (Upbeat)", value: "Puck" },
@@ -137,10 +242,14 @@
         // --- Initialization ---
         function initialize() {
             populateVoices(voiceSelect);
+            populateAudioTracks(); 
+            
+            // Audio Listeners
             generateBtn.addEventListener('click', handleGenerateSpeech);
             downloadBtn.addEventListener('click', handleDownload);
             audioModeRadios.forEach(radio => radio.addEventListener('change', updateUIMode));
             speakerCountInput.addEventListener('input', () => generateSpeakerSelectors(speakerCountInput.value));
+            
             updateUIMode(); // Initial UI setup
         }
 
@@ -154,12 +263,22 @@
             });
         }
         
+        // --- Function to Populate Tracks ---
+        function populateAudioTracks() {
+            for (let i = 1; i <= 100; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Track ${i}`;
+                audioTrackSelect.appendChild(option);
+            }
+        }
+        
         function updateUIMode() {
             const selectedMode = document.querySelector('input[name="audio-mode"]:checked').value;
             if (selectedMode === 'single') {
                 singleVoiceSettings.classList.remove('hidden');
                 conversationSettings.classList.add('hidden');
-                scriptText.placeholder = "Enter your text here... For example: 'Hello, world! I am a natural language model.'";
+                scriptText.placeholder = "Enter your text here..";
             } else {
                 singleVoiceSettings.classList.add('hidden');
                 conversationSettings.classList.remove('hidden');
@@ -170,24 +289,25 @@
         
         function generateSpeakerSelectors(count) {
             speakerVoicesContainer.innerHTML = '';
-            for (let i = 1; i <= count; i++) {
+            // Ensures count does not exceed max or number of voices
+            const numSpeakers = Math.min(Math.max(2, parseInt(count, 10)), voices.length);
+
+            for (let i = 1; i <= numSpeakers; i++) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'flex items-center space-x-3';
                 
                 const label = document.createElement('label');
                 label.htmlFor = `speaker-voice-${i}`;
-                label.className = 'font-medium text-gray-700 w-1/3';
-                label.textContent = `Speaker ${i} Voice`; // Traducido
+                label.className = 'font-medium text-gray-700 w-1/3 label-elegant';
+                label.textContent = `Speaker ${i} Voice`; 
                 
                 const select = document.createElement('select');
                 select.id = `speaker-voice-${i}`;
-                select.className = 'speaker-voice-select w-2/3 p-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500';
+                select.className = 'speaker-voice-select w-2/3 p-2 bg-white border border-gray-300 rounded-lg form-control-elegant';
                 populateVoices(select);
                 
-                // Assign different default voices for the first few speakers
-                if (i <= voices.length) {
-                    select.selectedIndex = (i - 1) % voices.length;
-                }
+                // Assign different default voices
+                select.selectedIndex = (i - 1) % voices.length;
 
                 wrapper.appendChild(label);
                 wrapper.appendChild(select);
@@ -220,12 +340,12 @@
             const text = scriptText.value.trim();
 
             if (!apiKey) {
-                displayError("Please enter your Google AI API Key to proceed."); // Traducido
+                displayError("Please enter your Google AI API Key to proceed."); 
                 return;
             }
 
             if (!text) {
-                displayError("Please enter some text in the script area."); // Traducido
+                displayError("Please enter some text in the script area."); 
                 return;
             }
 
@@ -233,104 +353,129 @@
             mp3Blob = null; // Reset blob on each generation
 
             try {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-                const selectedMode = document.querySelector('input[name="audio-mode"]:checked').value;
-                let payload;
-
-                if (selectedMode === 'single') {
-                    payload = {
-                        contents: [{ parts: [{ text: `Say it with a clear and natural tone: ${text}` }] }], // Traducido
-                        generationConfig: {
-                            responseModalities: ["AUDIO"],
-                            speechConfig: {
-                                voiceConfig: { prebuiltVoiceConfig: { voiceName: voiceSelect.value } }
-                            }
-                        },
-                        model: "gemini-2.5-flash-preview-tts"
-                    };
-                } else {
-                    const speakerVoiceSelectors = document.querySelectorAll('.speaker-voice-select');
-                    const speakerVoiceConfigs = [];
-                    speakerVoiceSelectors.forEach((select, index) => {
-                        const speakerName = `Speaker ${index + 1}`; // Traducido
-                        speakerVoiceConfigs.push({
-                            speaker: speakerName,
-                            voiceConfig: { prebuiltVoiceConfig: { voiceName: select.value } }
-                        });
-                    });
-
-                    payload = {
-                        contents: [{ parts: [{ text: `TTS the following conversation:\n${text}` }] }], // Traducido
-                        generationConfig: {
-                            responseModalities: ["AUDIO"],
-                            speechConfig: {
-                                multiSpeakerVoiceConfig: { speakerVoiceConfigs: speakerVoiceConfigs }
-                            }
-                        },
-                        model: "gemini-2.5-flash-preview-tts"
-                    };
-                }
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) {
-                    // --- IMPROVED ERROR HANDLING ---
-                    let errorDetails = `API Error: ${response.status} ${response.statusText}`; // Traducido
+                // Exponential Backoff implementation (simple version for the fetch logic)
+                const MAX_RETRIES = 3;
+                let lastError = null;
+                for (let retry = 0; retry < MAX_RETRIES; retry++) {
                     try {
-                        const errorData = await response.json();
-                        if (errorData && errorData.error && errorData.error.message) {
-                            errorDetails = errorData.error.message;
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+                        const selectedMode = document.querySelector('input[name="audio-mode"]:checked').value;
+                        let payload;
+
+                        if (selectedMode === 'single') {
+                            payload = {
+                                contents: [{ parts: [{ text: `Say it with a clear and natural tone: ${text}` }] }], 
+                                generationConfig: {
+                                    responseModalities: ["AUDIO"],
+                                    speechConfig: {
+                                        voiceConfig: { prebuiltVoiceConfig: { voiceName: voiceSelect.value } }
+                                    }
+                                },
+                                model: "gemini-2.5-flash-preview-tts"
+                            };
+                        } else {
+                            const speakerVoiceSelectors = document.querySelectorAll('.speaker-voice-select');
+                            const speakerVoiceConfigs = [];
+                            speakerVoiceSelectors.forEach((select, index) => {
+                                const speakerName = `Speaker ${index + 1}`; 
+                                speakerVoiceConfigs.push({
+                                    speaker: speakerName,
+                                    voiceConfig: { prebuiltVoiceConfig: { voiceName: select.value } }
+                                });
+                            });
+
+                            payload = {
+                                contents: [{ parts: [{ text: `TTS the following conversation:\n${text}` }] }], 
+                                generationConfig: {
+                                    responseModalities: ["AUDIO"],
+                                    speechConfig: {
+                                        multiSpeakerVoiceConfig: { speakerVoiceConfigs: speakerVoiceConfigs }
+                                    }
+                                },
+                                model: "gemini-2.5-flash-preview-tts"
+                            };
                         }
-                    } catch (e) {
-                        console.warn("Could not parse error response as JSON."); // Traducido
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.status === 429 && retry < MAX_RETRIES - 1) {
+                            // Too Many Requests, retry with backoff
+                            const delay = Math.pow(2, retry) * 1000;
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue; // Go to the next retry
+                        }
+                        
+                        if (!response.ok) {
+                            let errorDetails = `API Error: ${response.status} ${response.statusText}`; 
+                            try {
+                                const errorData = await response.json();
+                                if (errorData && errorData.error && errorData.error.message) {
+                                    errorDetails = errorData.error.message;
+                                }
+                            } catch (e) {
+                                // Failed to parse JSON body for error details
+                            }
+                            throw new Error(errorDetails);
+                        }
+
+                        // Success path
+                        const result = await response.json();
+                        const audioPart = result?.candidates?.[0]?.content?.parts?.[0];
+
+                        if (!audioPart || !audioPart.inlineData?.data) {
+                            throw new Error("Invalid response from API. Audio data not found."); 
+                        }
+
+                        const audioData = audioPart.inlineData.data;
+                        const mimeType = audioPart.inlineData.mimeType;
+                        
+                        const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                        if (!sampleRateMatch) {
+                            throw new Error("Could not determine sample rate from API response."); 
+                        }
+                        const sampleRate = parseInt(sampleRateMatch[1], 10);
+
+                        // Audio Conversion Pipeline: Base64 -> PCM -> MP3
+                        const pcmBuffer = base64ToArrayBuffer(audioData);
+                        const pcmInt16 = new Int16Array(pcmBuffer);
+                        mp3Blob = pcmToMp3(pcmInt16, sampleRate);
+                        
+                        const audioUrl = URL.createObjectURL(mp3Blob);
+                        audioPlayer.src = audioUrl;
+                        
+                        audioPlayer.style.display = 'block';
+                        downloadBtn.style.display = 'block';
+                        errorMessage.textContent = '';
+                        return; // Exit function on success
+
+                    } catch (error) {
+                        lastError = error;
+                        if (retry === MAX_RETRIES - 1) {
+                            throw lastError; // Re-throw the last error if all retries fail
+                        }
+                        // For non-429 errors, we typically don't retry, but the backoff loop handles it.
+                        // For this application, we'll break on non-429 errors to avoid unnecessary waits.
+                        if (!error.message.includes("429")) {
+                            throw error;
+                        }
                     }
-                    throw new Error(errorDetails);
                 }
-
-                const result = await response.json();
-                const audioPart = result?.candidates?.[0]?.content?.parts?.[0];
-
-                if (!audioPart || !audioPart.inlineData?.data) {
-                    throw new Error("Invalid response from API. Audio data not found."); // Traducido
-                }
-
-                const audioData = audioPart.inlineData.data;
-                const mimeType = audioPart.inlineData.mimeType;
-                
-                const sampleRateMatch = mimeType.match(/rate=(\d+)/);
-                if (!sampleRateMatch) {
-                    throw new Error("Could not determine sample rate from API response."); // Traducido
-                }
-                const sampleRate = parseInt(sampleRateMatch[1], 10);
-
-                // --- NEW Audio Conversion Pipeline: Base64 -> PCM -> MP3 ---
-                const pcmBuffer = base64ToArrayBuffer(audioData);
-                const pcmInt16 = new Int16Array(pcmBuffer);
-                mp3Blob = pcmToMp3(pcmInt16, sampleRate);
-                
-                const audioUrl = URL.createObjectURL(mp3Blob);
-                audioPlayer.src = audioUrl;
-                
-                audioPlayer.style.display = 'block';
-                downloadBtn.style.display = 'block';
-                errorMessage.textContent = '';
 
             } catch (error) {
-                console.error('Speech generation failed:', error); // Traducido
+                console.error('Speech generation failed:', error); 
                 
-                // --- ERROR MESSAGE IMPROVEMENT ---
                 let friendlyErrorMessage = error.message;
                 if (error.message.includes("API key not valid")) {
-                    friendlyErrorMessage = "The API key you entered is not valid. Please check your Google AI Studio key."; // Traducido
+                    friendlyErrorMessage = "The API key you entered is not valid. Please check your Google AI Studio key."; 
                 } else if (error.message.includes("401")) {
-                    friendlyErrorMessage = "Authorization Error (401). Make sure your API key is correct and has permissions."; // Traducido
+                    friendlyErrorMessage = "Authorization Error (401). Make sure your API key is correct and has permissions."; 
                 }
 
-                displayError(`An error occurred: ${friendlyErrorMessage}`); // Traducido
+                displayError(`An error occurred: ${friendlyErrorMessage}`); 
             } finally {
                 showLoading(false);
             }
@@ -338,9 +483,6 @@
 
         // --- Audio Format Conversion Helpers ---
 
-        /**
-         * Converts a Base64 string to an ArrayBuffer.
-         */
         function base64ToArrayBuffer(base64) {
             const binaryString = window.atob(base64);
             const len = binaryString.length;
@@ -351,53 +493,48 @@
             return bytes.buffer;
         }
 
-        /**
-         * Encodes PCM data (Int16Array) to an MP3 Blob using lamejs.
-         * This is the simplified and corrected function.
-         * @param {Int16Array} pcmData - The PCM audio data.
-         * @param {number} sampleRate - The sample rate (e.g., 24000).
-         * @returns {Blob} - The MP3 audio Blob.
-         */
         function pcmToMp3(pcmData, sampleRate) {
-            const numChannels = 1; // Gemini TTS API returns mono
-            const kbps = 128; // MP3 quality (128 kbps)
+            const numChannels = 1; 
+            const kbps = 128; 
             const mp3encoder = new lamejs.Mp3Encoder(numChannels, sampleRate, kbps);
             const mp3Data = [];
-            
-            const sampleBlockSize = 1152; // LAME block size
+            const sampleBlockSize = 1152; 
             
             for (let i = 0; i < pcmData.length; i += sampleBlockSize) {
-                // Get a chunk of PCM data
                 const sampleChunk = pcmData.subarray(i, i + sampleBlockSize);
-                
-                // Encode the chunk
                 const mp3buf = mp3encoder.encodeBuffer(sampleChunk);
                 if (mp3buf.length > 0) {
-                    mp3Data.push(mp3buf); // mp3buf is already an Int8Array
+                    mp3Data.push(mp3buf); 
                 }
             }
             
-            // Flush any remaining data in the encoder
             const mp3buf = mp3encoder.flush();
             if (mp3buf.length > 0) {
                 mp3Data.push(mp3buf);
             }
             
-            // Create the final MP3 Blob
             return new Blob(mp3Data, { type: 'audio/mpeg' });
         }
-
 
         /**
          * Handles the download of the MP3 file.
          */
         function handleDownload() {
             if (mp3Blob) {
+                // --- Start: Dynamic Filename Logic (WITH UNDERSCORES) ---
+                const trackNum = audioTrackSelect.value;
+                const audioType = audioTypeSelect.value;
+                const englishLevel = englishLevelSelect.value;
+
+                // Construct the filename: Track_Number_Type_Level.mp3
+                const newFilename = `Track_${trackNum}_${audioType}_${englishLevel}.mp3`; 
+                // --- End: Dynamic Filename Logic ---
+
                 const url = URL.createObjectURL(mp3Blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
                 a.href = url;
-                a.download = 'speech.mp3';
+                a.download = newFilename; 
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
